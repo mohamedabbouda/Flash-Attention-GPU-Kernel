@@ -1,19 +1,20 @@
 # Flash-Attention-GPU-Kernel
-# Flash-Attention-GPU-Kernel
 
-A learning project for implementing and understanding **Flash Attention** using GPU programming tools such as **Triton** and **CUDA**.
+An implementation **Flash Attention** using **Triton** and **CUDA**.
 
-This repository is based on an open tutorial/project by `hkproj`, which implements Flash Attention 2 in Triton and includes CUDA examples.
 
-Original source: https://github.com/hkproj/triton-flash-attention
+
+---
 
 ## Overview
 
 Flash Attention is an optimized attention algorithm designed to make Transformer attention faster and more memory-efficient on GPUs.
 
-Standard attention can be expensive because it materializes large attention matrices, where memory usage grows quadratically with sequence length. Flash Attention improves this by using GPU-aware tiling and reducing memory reads and writes between high-bandwidth memory and on-chip SRAM.
+Standard attention materializes a large attention matrix, which can become expensive for long sequences. Flash Attention improves this by using GPU-aware tiling and reducing memory reads and writes between high-bandwidth memory and on-chip SRAM.
 
-## Project Structure
+---
+
+## Repository Structure
 
 ```text
 Flash-Attention-GPU-Kernel/
@@ -28,83 +29,70 @@ Flash-Attention-GPU-Kernel/
 │   └── vector_add_simple.cu
 ├── .gitignore
 └── README.md
-Contents
-triton/
+```
 
-Contains the main Flash Attention implementation using Triton.
+---
 
-flash_attention.py
-Triton-based Flash Attention implementation and comparison with a naive attention implementation.
-requirements.txt
-Python dependencies needed to run the Triton implementation.
-cuda/
+## Main Components
 
-Contains basic CUDA examples used for learning GPU programming fundamentals.
+### Triton Implementation
 
-vector_add_simple.cu
-vector_add.cu
-matrix_add.cu
-cuda_common.cuh
-Makefile
+The `triton/` directory contains the main Flash Attention implementation.
 
-These files are useful for practicing CUDA compilation, kernels, memory allocation, and simple GPU computations.
+| File | Description |
+|---|---|
+| `flash_attention.py` | Triton-based Flash Attention implementation and comparison with naive attention |
+| `requirements.txt` | Python dependencies required to run the Triton implementation |
 
-Installation
+
+---
+
+## Installation
 
 Clone the repository:
 
-git clone https://github.com/YOUR_USERNAME/Flash-Attention-GPU-Kernel.git
+```bash
+git clone https://github.com/mohamedabbouda/Flash-Attention-GPU-Kernel.git
 cd Flash-Attention-GPU-Kernel
+```
 
 Install the Python dependencies:
 
+```bash
 pip install -r triton/requirements.txt
-Running the Triton Flash Attention Code
+```
+
+---
+
+## Running the Triton Flash Attention Code
+
+```bash
 cd triton
 python flash_attention.py
+```
 
-You may need to reduce the values of:
+You may need to reduce these values inside `flash_attention.py` depending on your GPU memory:
 
+```python
 BATCH_SIZE
 NUM_HEADS
 SEQ_LEN
 HEAD_DIM
+```
 
-Large sequence lengths can require a lot of GPU memory, especially when comparing against the naive attention implementation.
+Large sequence lengths can require a lot of GPU memory, especially when comparing Flash Attention with a naive attention implementation.
 
-Running the CUDA Examples
-cd cuda
-make
-make run
+---
 
-To clean the generated output files:
 
-make clean
-Learning Goals
 
-The goal of this project is to understand:
+---
 
-GPU programming basics
-CUDA kernels
-Triton kernels
-Transformer attention
-Flash Attention memory optimization
-Differences between naive attention and optimized attention
-Attribution
 
-This project is based on the open tutorial repository:
 
-Original repo: https://github.com/hkproj/triton-flash-attention
-Instructor/author: hkproj / Umar Jamil
 
-This repository is used for educational purposes and personal learning.
 
-References
-FlashAttention paper: https://arxiv.org/abs/2205.14135
-FlashAttention-2 paper: https://arxiv.org/abs/2307.08691
-Original tutorial repo: https://github.com/hkproj/triton-flash-attention
+## References
 
-Important: replace this part with your actual GitHub username:
-
-```bash
-git clone https://github.com/YOUR_USERNAME/Flash-Attention-GPU-Kernel.git
+- FlashAttention paper: https://arxiv.org/abs/2205.14135
+- FlashAttention-2 paper: https://arxiv.org/abs/2307.08691
