@@ -1,7 +1,6 @@
 # Flash-Attention-GPU-Kernel
 
-An implementation **Flash Attention** using **Triton** and **CUDA**.
-
+An implementation of **Flash Attention** using **Triton** and **CUDA**.
 
 
 ---
